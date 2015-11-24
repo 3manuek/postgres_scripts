@@ -9,11 +9,12 @@ AS $$
   import os
   hbaLine = "host " + str(dbtarget) + "\t" + str(username) + "\t" + str(iptarget) + "\t" + str(methodauth)
   createuser = "CREATE USER " + str(username) + " WITH PASSWORD '" + str(passtext) + "'"
-
+  grantuser = "GRANT connect ON DATABASE " + str(dbtarget) + " TO " + str(username)
   hbaFilePath = plpy.execute("select setting from pg_settings where name = 'hba_file'", 1)
   hs = open(hbaFilePath[0]['setting'],"a")
   hs.write(hbaLine + "\n")
   addUserCommand = plpy.execute(createuser, 1)
+  grantUserCommand = plpy.execute(grantuser, 1)
   reload = plpy.execute("select pg_reload_conf()", 1)
   hs.close()
   return True
