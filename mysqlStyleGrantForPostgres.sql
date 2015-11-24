@@ -1,3 +1,8 @@
+--
+-- NOT FOR PRODUCTION
+-- This function needs a lot of work and is only an example for the 
+-- current thread: http://dba.stackexchange.com/questions/121732/restrict-postgres-roles-by-ip-address-outside-of-the-pg-hba-conf-file/122008#122008
+
 CREATE OR REPLACE FUNCTION addRemoteUser(
   username text,
   iptarget text DEFAULT '0.0.0.0/0',
